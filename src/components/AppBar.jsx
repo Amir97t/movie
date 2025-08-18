@@ -13,7 +13,6 @@ export default function AppBar() {
           <img src="src/assets/movieLogo.svg" className="h-6 sm:h-9" />
         </span>
       </NavbarBrand>
-
       <NavbarCollapse className="flex justify-between ">
         <NavbarLink className="text-white" href="#">
           Movies

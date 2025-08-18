@@ -1,13 +1,20 @@
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarCollapse,
+  NavbarLink,
+} from "flowbite-react";
+import { Link } from "react-router-dom";
+
 export default function Search() {
   return (
-    <div className="flex flex-col text-[#EBEEF5] gap-4 w-[588px]">
+    <div className="flex flex-col text-[#EBEEF5] gap-5 w-[588px] mt-[60px]">
       <h1 className="text-[64px]">MailHereko</h1>
-     
-        <p className="text-[16px] font-normal ">
-          List of movies and TV Shows, I, Pramod Poudel have watched till date.
-          Explore what I have watched and also feel free to make a suggestion.
-          😉
-        </p>
+
+      <p className="text-[16px] font-normal ">
+        List of movies and TV Shows, I, Pramod Poudel have watched till date.
+        Explore what I have watched and also feel free to make a suggestion. 😉
+      </p>
 
       <div>
         <img src="src/assets/searchIcon.svg" className="absolute mt-5 ml-2" />
@@ -18,6 +25,13 @@ export default function Search() {
              border-gray-600 "
         />
       </div>
+      <Navbar fluid rounded className="bg-[#121829] ">
+        <NavbarCollapse  className="flex justify-between ">
+          <NavbarLink className="text-white" as={Link} to="categories">
+            categories
+          </NavbarLink>
+        </NavbarCollapse>
+      </Navbar>
     </div>
   );
 }
