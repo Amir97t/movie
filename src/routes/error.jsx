@@ -9,7 +9,7 @@ import {
 
 export default function ErroPage() {
   return (
-    <div className="bg-[#121829]  h-screen max-w-[1440px]  mx-auto">
+    <div className="bg-[#121829]  h-svh max-w-[1440px]  mx-auto">
       <div>
         <Navbar fluid className=" bg-[#161d31]">
           <NavbarBrand href="#">
@@ -24,9 +24,9 @@ export default function ErroPage() {
           </NavbarCollapse>
         </Navbar>
         <div className="bg-[#121829] text-white grid place-items-center gap-4">
-          <img src="src/assets/error.svg" />
-          <h2 className="font-[Poppins] text-5xl">Lost you'r way?</h2>
-          <p>
+          <img src="src/assets/error.svg" className="w-[400px] h-[320px]" />
+          <h2 className="font-[Poppins]  text-5xl">Lost you'r way?</h2>
+          <p className="text-[#8E95A9]">
             Oops! This is awkward. You are looking for something that doesn't
             actually exist.
           </p>
