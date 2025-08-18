@@ -26,15 +26,18 @@ export default function ErroPage() {
             </NavbarLink>
           </NavbarCollapse>
         </Navbar>
-        <div className="bg-[#121829] text-white grid place-items-center gap-4">
+        <div className="bg-[#121829] mt-15 text-white grid place-items-center gap-4">
           <img src="src/assets/error.svg" className="w-[400px] h-[320px]" />
           <h2 className="font-[Poppins]  text-5xl">Lost you'r way?</h2>
-          <p className="text-[#8E95A9]">
-            {error.status} <span className="font-bold">{error.statusText}</span>{" "}
-            --- Oops! This is awkward. You are looking for something that
-            doesn't actually exist.
-          </p>
-
+          {error && (
+            <p className="text-[#8E95A9]">
+              {error.status}{" "}
+              <span className="font-bold">{error.statusText}</span>
+              --- Oops! This is awkward. You are looking for something that
+              doesn't actually exist.
+            </p>
+          )}
+          <p>{error && error.error && error.error.message}</p>
           <Button
             className="bg-[#7B6EF6] w-[100px] h-[46px]"
             as={Link}
