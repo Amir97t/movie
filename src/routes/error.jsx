@@ -6,8 +6,11 @@ import {
   NavbarCollapse,
   NavbarLink,
 } from "flowbite-react";
+import { useRouteError } from "react-router";
 
 export default function ErroPage() {
+  const error = useRouteError();
+
   return (
     <div className="bg-[#121829]  h-svh max-w-[1440px]  mx-auto">
       <div>
@@ -27,8 +30,9 @@ export default function ErroPage() {
           <img src="src/assets/error.svg" className="w-[400px] h-[320px]" />
           <h2 className="font-[Poppins]  text-5xl">Lost you'r way?</h2>
           <p className="text-[#8E95A9]">
-            Oops! This is awkward. You are looking for something that doesn't
-            actually exist.
+            {error.status} <span className="font-bold">{error.statusText}</span>{" "}
+            --- Oops! This is awkward. You are looking for something that
+            doesn't actually exist.
           </p>
 
           <Button
