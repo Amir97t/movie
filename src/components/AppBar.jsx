@@ -7,14 +7,14 @@ import {
 
 export default function AppBar() {
   return (
-    <Navbar fluid rounded className="bg-[#121829CC] max-w-[1440px] mx-auto">
-      <NavbarBrand  href="#">
-        <span className="ml-20  whitespace-nowrap text-xl font-semibold">
-          <img src="src/assets/movieLogo.svg" className="mr-3 h-6 sm:h-9" />
+    <Navbar fluid rounded className="bg-[#121829] ">
+      <NavbarBrand href="#">
+        <span className=" whitespace-nowrap text-xl font-semibold">
+          <img src="src/assets/movieLogo.svg" className="h-6 sm:h-9" />
         </span>
       </NavbarBrand>
 
-      <NavbarCollapse className="flex justify-between mr-20  gap-4">
+      <NavbarCollapse className="flex justify-between ">
         <NavbarLink className="text-white" href="#">
           Movies
         </NavbarLink>
