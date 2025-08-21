@@ -1,24 +1,32 @@
 import { useEffect, useState } from "react";
 import getGenres from "../api/getGenres";
+// import { Outlet } from "react-router";
+import { Link } from "react-router";
 
 export default function Genres() {
   const [genres, setGenres] = useState(null);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getGenres().then((gen) => setGenres(gen));
+    setLoading(true);
+    getGenres().then((genre) => setGenres(genre));
+    setLoading(false);
   }, []);
 
   return (
     <>
-      <h2>Genres</h2>
-      {genres && (
-        <ul>
+      {!loading && genres && (
+        <ul className="flex flex-wrap gap-4 max-h-20 mt-5">
           {genres.map((genre, index) => (
-            <li key={index}>{genre.name}</li>
+            <Link key={index} to={"/ali"}>
+              <li className="hover:bg-[#7B6EF6] rounded-xs border hover:cursor-pointer ">
+                {genre.name}
+              </li>
+            </Link>
           ))}
         </ul>
       )}
+      {loading && <p>Loading...</p>}
     </>
   );
 }
