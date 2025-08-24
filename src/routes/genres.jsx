@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import getGenres from "../api/getGenres";
-// import { Outlet } from "react-router";
-import { Link } from "react-router";
+import { Outlet } from "react-router";
+import { NavLink } from "react-router";
 
 export default function Genres() {
   const [genres, setGenres] = useState(null);
@@ -9,8 +9,10 @@ export default function Genres() {
 
   useEffect(() => {
     setLoading(true);
-    getGenres().then((genre) => setGenres(genre));
-    setLoading(false);
+    getGenres().then((genres) => {
+      setLoading(false);
+      setGenres(genres);
+    });
   }, []);
 
   return (
@@ -18,15 +20,25 @@ export default function Genres() {
       {!loading && genres && (
         <ul className="flex flex-wrap gap-4 max-h-20 mt-5">
           {genres.map((genre, index) => (
-            <Link key={index} to={"/ali"}>
-              <li className="hover:bg-[#7B6EF6] rounded-xs border hover:cursor-pointer ">
-                {genre.name}
-              </li>
-            </Link>
+            <li
+              key={index}
+              className="hover:bg-[#7B6EF6] rounded-xs border hover:cursor-pointer "
+            >
+              <NavLink to={genre.name}>
+                {({ isActive }) => {
+                  return (
+                    <span className={isActive ? "bg-amber-500" : ""}>
+                      {genre.name}
+                    </span>
+                  );
+                }}
+              </NavLink>
+            </li>
           ))}
         </ul>
       )}
-      {loading && <p>Loading...</p>}
+      {loading && <p>Loading ...</p>}
+      <Outlet />
     </>
   );
 }
