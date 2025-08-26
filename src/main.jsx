@@ -3,9 +3,8 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Root from "./routes/root.jsx";
 import Home, { HomeLoader } from "./routes/home.jsx";
-import Genres from "./routes/genres.jsx";
 import ErroPage from "./routes/error.jsx";
-import MoviebyGenre, { MovieByGenreLoader } from "./routes/movieByGenre.jsx";
+import MovieByGenre, { MovieByGenreLoader } from "./routes/movieByGenre.jsx";
 import MoviePage, { MovieLoader } from "./routes/movie.jsx";
 
 const router = createBrowserRouter([
@@ -20,15 +19,9 @@ const router = createBrowserRouter([
         loader: HomeLoader,
       },
       {
-        path: "genres",
-        Component: Genres,
-        children: [
-          {
-            path: ":genre",
-            Component: MoviebyGenre,
-            loader: MovieByGenreLoader,
-          },
-        ],
+        path: "genres/:genre",  
+        Component: MovieByGenre,
+        loader: MovieByGenreLoader,
       },
       {
         path: "movies/:id",
