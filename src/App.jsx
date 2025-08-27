@@ -1,14 +1,19 @@
-// import Home from "./components/Home";
-import AppBar from "./components/AppBar";
-import Search from "./components/Search";
+import Navbar from "./components/NavBar";
+import Main from "./components/Main";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <div className="bg-[#121829]  h-screen max-w-[1440px]  mx-auto">
+      <div className="w-[1440px] mx-auto bg-[url('/src/assets/Background.svg')] ">
         <div className="mx-20">
-          <AppBar />
-          <Search />
+          <Navbar />
+          <main className="flex ">
+            <Main />
+          </main>
+          <div className="p-4 min-h-screen  text-white">
+            <Outlet />
+          </div>
         </div>
       </div>
     </>
