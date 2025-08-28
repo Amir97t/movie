@@ -4,24 +4,23 @@ import {
   NavbarCollapse,
   NavbarLink,
 } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 export default function AppBar() {
   return (
-    <Navbar fluid rounded className="bg-[#121829CC] ">
+    <Navbar className="bg-[#00000033] w-full">
       <NavbarBrand href="#">
-        <span className=" whitespace-nowrap text-xl font-semibold">
-          <img src="../src/assets/movieLogo.svg" className="h-6 sm:h-9" />
-        </span>
+        <img src="../src/assets/icon-tab.svg" className="h-6 sm:h-9" />
       </NavbarBrand>
-      <NavbarCollapse className="flex justify-between ">
-        <NavbarLink className="text-white" href="#">
+      <NavbarCollapse>
+        <NavbarLink className="text-white" as={Link} to="/all">
           Movies
         </NavbarLink>
         <NavbarLink className="text-white" href="#">
           TV Shows
         </NavbarLink>
-        <NavbarLink className="flex text-white gap-2" href="#">
-          Suggest me <img src="../src/assets/arrow-right.svg" />
+        <NavbarLink className="flex text-white gap-2" as={Link} to="/">
+          Home <img src="../src/assets/arrow-right.svg" />
         </NavbarLink>
       </NavbarCollapse>
     </Navbar>
