@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router";
-import { useState, useEffect, useRef } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import getAllMovies from "../api/getAllMovies";
 import MovieList from "../components/MovieList";
 import MovieCardSkeleton from "../components/MovieCardSkeleton";
@@ -12,78 +13,61 @@ export async function HomeLoader() {
 export default function Home() {
   const { movies } = useLoaderData();
 
-  const [allMovies, setAllMovies] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(page < movies.metadata.page_count);
-  const [loading, setLoading] = useState(true);
+  const [allMovies, setAllMovies] = useState(movies.data || []);
+  const [page, setPage] = useState(2);
+  const [hasMore, setHasMore] = useState(page <= movies.metadata.page_count);
 
-  const loaderRef = useRef(null);
-
- 
-  useEffect(() => {
-    setAllMovies(movies.data.slice(0, 8));
-    setLoading(false);
-  }, [movies]);
-
-
-  useEffect(() => {
-    if (page === 1) return;
-    const fetchMore = async () => {
-      setLoading(true);
+  const fetchMoreMovies = async () => {
+    try {
       const next = await getAllMovies(page);
-      setAllMovies((prev) => [...prev, ...next.data]);
-      setLoading(false);
-      if (page >= next.metadata.page_count) {
+      if (next.data.length === 0) {
         setHasMore(false);
-      }
-    };
-    fetchMore();
-  }, [page]);
-
- 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
-          setPage((prev) => prev + 1);
+      } else {
+        setAllMovies((prev) => [...prev, ...next.data]);
+        setPage((prev) => prev + 1);
+        if (page >= next.metadata.page_count) {
+          setHasMore(false);
         }
-      },
-      { threshold: 1 }
-    );
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
+      }
+    } catch (err) {
+      console.error(err);
+      setHasMore(false);
     }
-    return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
-    };
-  }, [hasMore, loading]);
+  };
+
+  if (!allMovies.length) {
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-5">
+        {Array.from({ length: 8 }).map((_, idx) => (
+          <MovieCardSkeleton key={idx} />
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <div className="p-5">
+    <div className="mt-5">
       <h1 className="text-xl font-bold mb-4">Movies</h1>
-
-     
-      {loading && allMovies.length === 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Array.from({ length: 8 }).map((_, idx) => (
-            <MovieCardSkeleton key={idx} />
-          ))}
+      <InfiniteScroll
+        dataLength={allMovies.length}
+        next={fetchMoreMovies}
+        hasMore={hasMore}
+        loader={
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-5">
+            {Array.from({ length: 4 }).map((_, idx) => (
+              <MovieCardSkeleton key={idx} />
+            ))}
+          </div>
+        }
+        endMessage={
+          <p className="text-center mt-4">🎬 No more item on the list</p>
+        }
+        style={{ overflow: "visible" }}
+      >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <MovieList movies={allMovies} />
         </div>
-      ) : (
-        <MovieList movies={allMovies} />
-      )}
-
-      {hasMore && (
-        <div ref={loaderRef} className="flex justify-center mt-4">
-          {loading && allMovies.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-              {Array.from({ length: 4 }).map((_, idx) => (
-                <MovieCardSkeleton key={idx} />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+      </InfiniteScroll>
     </div>
   );
 }
