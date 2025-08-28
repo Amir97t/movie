@@ -14,24 +14,22 @@ const router = createBrowserRouter([
     errorElement: <ErroPage />,
     children: [
       {
-        index: true,
+        path: "all",
         Component: Home,
         loader: HomeLoader,
       },
       {
-        path: "genres/:genre",  
+        path: "genres/:genre",
         Component: MovieByGenre,
         loader: MovieByGenreLoader,
       },
-      {
-        path: "movies/:id",
-        Component: MoviePage,
-        loader: MovieLoader,
-      },
     ],
   },
-
-  // { path: "*", element: <NotFoundPage /> },
+  {
+    path: "movies/:id",
+    Component: MoviePage,
+    loader: MovieLoader,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
