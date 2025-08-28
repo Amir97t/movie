@@ -12,9 +12,9 @@ export default function ErroPage() {
   const error = useRouteError();
 
   return (
-    <div className="bg-[#121829]  h-svh max-w-[1440px]  mx-auto">
+    <div className=" h-svh max-w-[1440px]  mx-auto">
       <div>
-        <Navbar fluid className=" bg-[#161d31]">
+        <Navbar fluid className="bg-[#00000033]">
           <NavbarBrand href="#">
             <span className=" ml-20 whitespace-nowrap text-xl font-semibold">
               <img src="../src/assets/movieLogo.svg" className="h-6 sm:h-9" />
@@ -26,7 +26,7 @@ export default function ErroPage() {
             </NavbarLink>
           </NavbarCollapse>
         </Navbar>
-        <div className="bg-[#121829] mt-15 text-white grid place-items-center gap-4">
+        <div className=" mt-15 text-white grid place-items-center gap-4">
           <img src="src/assets/error.svg" className="w-[400px] h-[320px]" />
           <h2 className="font-[Poppins]  text-5xl">Lost you'r way?</h2>
           {error && (
