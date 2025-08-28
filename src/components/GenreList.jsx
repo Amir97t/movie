@@ -17,28 +17,34 @@ export default function Genres() {
   return (
     <>
       {!loading && genres && (
-        <ul className="flex flex-wrap gap-4 rounded-[12px] mt-5  bg-[#00000033]">
-          {genres.map((genre, index) => (
-            <li
-              key={index}
-              className="hover:bg-[#7B6EF6] w-[85px]  h-10 text-center items-center
-               hover:text-[#EBE9FE] text-[#8E95A9]  border-0 
-               hover:cursor-pointer rounded font-[Poppins] text-[16px] "
+        <ul className="flex flex-wrap gap-x-2.5 h-24  text-[16px] mt-6 font-[Poppins] bg-[#00000033] p-1 rounded-[12px] ">
+          <li className="mt-1" >
+            <NavLink
+              to={"/all"}
+              className={({ isActive }) =>
+                `px-6 py-2 rounded-[8px]   transition ${
+                  isActive
+                    ? "bg-[#7B6EF6] text-[#EBE9FE]"
+                    : "text-[#8E95A9] hover:bg-[#7B6EF6] hover:text-[#EBE9FE]"
+                }`
+              }
             >
-              <NavLink to={`/genres/${genre.name}`}>
-                {({ isActive }) => {
-                  return (
-                    <div
-                      className={
-                        isActive
-                          ? "bg-[#7B6EF6] h-10 rounded text-[#EBE9FE]"
-                          : ""
-                      }
-                    >
-                      {genre.name}
-                    </div>
-                  );
-                }}
+              All
+            </NavLink>
+           </li>
+          {genres.map((genre, index) => (
+            <li key={index}>
+              <NavLink
+                to={`/genres/${genre.name}`}
+                className={({ isActive }) =>
+                  `px-6 py-2 rounded-[8px]  transition ${
+                    isActive
+                      ? "bg-[#7B6EF6] text-[#EBE9FE]"
+                      : "text-[#8E95A9] hover:bg-[#7B6EF6] hover:text-[#EBE9FE]"
+                  }`
+                }
+              >
+                {genre.name}
               </NavLink>
             </li>
           ))}
