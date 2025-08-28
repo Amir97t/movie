@@ -1,9 +1,8 @@
-import { Link } from "react-router";
-import { Button } from "flowbite-react";
+import GenreList from "../components/GenreList";
 
-export default function Search() {
+export default function Home() {
   return (
-    <div className="text-[#EBEEF5]">
+    <div className="text-[#EBEEF5] ">
       <div className="flex flex-col text-[#EBEEF5] gap-5 w-[588px] mt-[60px]">
         <h1 className="text-[64px]">MailHereko</h1>
         <p className="text-[16px] font-normal ">
@@ -12,7 +11,10 @@ export default function Search() {
           😉
         </p>
         <div>
-          <img src="src/assets/searchIcon.svg" className="absolute mt-5 ml-2" />
+          <img
+            src="../src/assets/searchIcon.svg"
+            className="absolute mt-5 ml-2 hover:cursor-pointer"
+          />
           <input
             type="text"
             placeholder="Search Movies or TV Shows"
@@ -20,14 +22,8 @@ export default function Search() {
                border-gray-600 "
           />
         </div>
-        <Button
-          className="bg-[#7B6EF6] w-[100px] h-[46px] mt-2"
-          as={Link}
-          to="genres"
-        >
-          Genres
-        </Button>
       </div>
+      <GenreList />
     </div>
   );
 }
