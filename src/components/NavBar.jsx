@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function AppBar() {
   return (
-    <Navbar className="bg-[#00000033] w-full">
+    <Navbar className="bg-[#00000033] font-[Poppins] w-full">
       <NavbarBrand href="#">
         <img src="../src/assets/icon-tab.svg" className="h-6 sm:h-9" />
       </NavbarBrand>

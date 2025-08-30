@@ -12,7 +12,7 @@ export default function ErroPage() {
   const error = useRouteError();
 
   return (
-    <div className=" h-svh max-w-[1440px]  mx-auto">
+    <div className="h-svh max-w-[1440px]  mx-auto">
       <div>
         <Navbar fluid className="bg-[#00000033]">
           <NavbarBrand href="#">

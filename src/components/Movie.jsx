@@ -18,7 +18,6 @@ export default function Movie({ movie }) {
     <div className="w-[1200px] mx-auto text-[#EBEEF5]">
       <div>
         <NavBar />
-
         <div className="mt-10 w-[1200px] mx-auto ">
           <div className="relative">
             <img

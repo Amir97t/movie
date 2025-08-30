@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getMovieById(movieId) {
+export default async function getMovieById(movieId) {
   try {
     const response = await axios.get(
       `https://moviesapi.codingfront.dev/api/v1/movies/${movieId}`

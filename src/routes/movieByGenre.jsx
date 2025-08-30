@@ -52,7 +52,8 @@ export default function MovieByGenre() {
   }
 
   return (
-    <div className="mt-5 ">
+    <div className="mt-8">
+      <h2></h2>
       <InfiniteScroll
         dataLength={movies.length}
         next={fetchMoreMovies}

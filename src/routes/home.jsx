@@ -46,14 +46,14 @@ export default function Home() {
   }
 
   return (
-    <div className="mt-5">
-      <h1 className="text-xl font-bold mb-4">Movies</h1>
+    <div className="mt-5 w-[1300px]  text-[#EBEEF5]">
+      <h1 className="text-xl font-bold mb-4 ml-2">Movies</h1>
       <InfiniteScroll
         dataLength={allMovies.length}
         next={fetchMoreMovies}
         hasMore={hasMore}
         loader={
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-5">
+          <div className="grid grid-cols-2 md:grid-cols-4  mt-5">
             {Array.from({ length: 4 }).map((_, idx) => (
               <MovieCardSkeleton key={idx} />
             ))}

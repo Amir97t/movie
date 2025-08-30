@@ -17,8 +17,8 @@ export default function Genres() {
   return (
     <>
       {!loading && genres && (
-        <ul className="flex flex-wrap gap-x-2.5 h-24  text-[16px] mt-6 font-[Poppins] bg-[#00000033] p-1 rounded-[12px] ">
-          <li className="mt-1" >
+        <ul className="flex flex-wrap gap-2.5 h-24  text-[16px] mt-22 font-[Poppins] bg-[#00000033] p-1 rounded-[12px] ">
+          <li className="mt-2" >
             <NavLink
               to={"/all"}
               className={({ isActive }) =>
@@ -33,7 +33,7 @@ export default function Genres() {
             </NavLink>
            </li>
           {genres.map((genre, index) => (
-            <li key={index}>
+            <li className="mt-2" key={index}>
               <NavLink
                 to={`/genres/${genre.name}`}
                 className={({ isActive }) =>
