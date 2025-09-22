@@ -28,14 +28,14 @@ export default function Movie({ movie }) {
 
             <div className="absolute w-[560px] h-[120px] -bottom-10 left-20 max-w-md bg-[#20283ECC] backdrop-blur-md px-6 py-4 rounded-xl border border-blue-500/40">
               <p className="text-sm ml-4 mt-4">MaileHereko / {type}</p>
-              <h2 className="text-2xl font-semibold mt-1 ml-4">{title}</h2>
+              <h2 className="text-xl font-semibold mt-1 ml-4">{title}</h2>
             </div>
           </div>
           <div className="mt-15 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="flex w-[480px] justify-center">
               <img
                 src={poster}
-                className="shadow-lg rounded-3xl w-full max-w-sm object-cover"
+                className="shadow-lg rounded-3xl ml-16 w-full max-w-sm object-cover"
                 alt="Poster of current movie"
               />
             </div>
@@ -56,25 +56,25 @@ export default function Movie({ movie }) {
                     {imdb_rating}
                   </span>
                 </div>
-                <div className="flex flex-col mt-5 gap-3">
-                  <p className="flex flex-col">
+                <div className="flex flex-col mt-5 gap-6">
+                  <p className="flex gap-1 flex-col">
                     <span className="text-gray-400">Type</span>
                     <span className="text-white text-xl">{type}</span>
                   </p>
-                  <p className="flex flex-col">
+                  <p className="flex gap-1  flex-col">
                     <span className="text-gray-400">Release Date</span>
                     <span className="text-white text-xl">{released}</span>
                   </p>
-                  <p className="flex flex-col">
+                  <p className="flex gap-1  flex-col">
                     <span className="text-gray-400">Runtime</span>
                     <span className="text-white text-xl">{runtime}</span>
                   </p>
-                  <p className="flex flex-col">
+                  <p className="flex  gap-1  flex-col">
                     <span className="text-gray-400">Director</span>
                     <span className="text-white text-xl">{director}</span>
                   </p>
 
-                  <p className="flex flex-col">
+                  <p className="flex gap-1  flex-col">
                     <span className="text-gray-400">Genres:</span>
                     <span className="text-white text-xl">
                       {genres && genres.length > 0 ? genres.join(", ") : "N/A"}
