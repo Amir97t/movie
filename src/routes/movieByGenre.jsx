@@ -66,7 +66,9 @@ export default function MovieByGenre() {
           </div>
         }
         endMessage={
-          <p className="text-center mt-4">🎬 No More Item On The List</p>
+          <p className="text-center mt-4 text-[#EBEEF5]">
+            🎬 No More Item On The List
+          </p>
         }
         style={{ overflow: "visible" }}
       >
