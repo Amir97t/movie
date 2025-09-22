@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 export default function MovieCard({ id, title, poster, imdb_rating }) {
   return (
-    <div className="relative w-[282px] h-[480px]">
-      <div className="absolute top-3 left-3 w-14 h-10 rounded 
-      bg-[#000000A6] text-[#FFAD49] flex items-center 
+    <div className="relative w-[282px]  h-[480px]">
+      <div className="absolute top-3  left-3 w-14 h-10 rounded 
+      bg-[#000000A6] text-[#FFAD49] flex items-center
       justify-center gap-1">
         <img
           className="h-4 w-4"
           src="../src/assets/star.svg"
           alt="rating-star"
         />
-        <span className="text-sm font-semibold">{imdb_rating}</span>
+        <span className="text-sm  font-semibold">{imdb_rating}</span>
       </div>
       <Link to={`/movies/${id}`}>
         <Card
@@ -25,7 +25,7 @@ export default function MovieCard({ id, title, poster, imdb_rating }) {
             />
           )}
         >
-          <h5 className="text-left text-[16px] font-[Poppins] font-semibold text-[#EBEEF5]">
+          <h5 className="text-left mb-1  h-12 text-[16px] text-sm font-[Poppins] font-semibold text-[#EBEEF5]">
             {title}
           </h5>
         </Card>
