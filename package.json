@@ -13,6 +13,8 @@
     "@tailwindcss/vite": "^4.1.12",
     "axios": "^1.11.0",
     "flowbite-react": "^0.12.7",
+    "framer-motion": "^12.23.19",
+    "motion": "^12.23.19",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-infinite-scroll-component": "^6.1.0",

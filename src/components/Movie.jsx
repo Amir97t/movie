@@ -56,7 +56,7 @@ export default function Movie({ movie }) {
                     {imdb_rating}
                   </span>
                 </div>
-                <div className="flex flex-col mt-5 gap-6">
+                <div className="flex flex-col mt-5 gap-4">
                   <p className="flex gap-1 flex-col">
                     <span className="text-gray-400">Type</span>
                     <span className="text-white text-xl">{type}</span>

@@ -1,9 +1,12 @@
+// src/routes/root.jsx
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router";
+import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "../components/NavBar";
 import GenreList from "../components/GenreList";
 import getMovieBySearch from "../api/getMoviesBySearch";
 import MovieCard from "../components/MovieCard";
+import MovieCardSkeleton from "../components/MovieCardSkeleton";
 
 const XIcon = ({ className }) => (
   <svg
@@ -23,20 +26,32 @@ const XIcon = ({ className }) => (
 );
 
 export default function Root() {
+  const location = useLocation();
+
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
+  const [loadingSearch, setLoadingSearch] = useState(false);
 
   const handleSearch = async () => {
-    if (query.trim().length > 0) {
-      const results = await getMovieBySearch(query);
-      if (results.length === 0) {
+    const q = query.trim();
+    if (!q) return;
+    try {
+      setLoadingSearch(true);
+      const results = await getMovieBySearch(q);
+      if (!results || results.length === 0) {
         setError("We couldn't find that movie. Did you mean something else?");
         setMovies([]);
       } else {
         setError("");
         setMovies(results);
       }
+    } catch (err) {
+      console.error(err);
+      setError("Search failed. Please try again.");
+      setMovies([]);
+    } finally {
+      setLoadingSearch(false);
     }
   };
 
@@ -53,19 +68,57 @@ export default function Root() {
     }
   };
 
+  const isSearching = query.trim().length > 0;
+
   return (
-    <div className="w-[1440px] mx-auto text-[#EBEEF5]">
+    <motion.div
+      className="w-[1440px] mx-auto text-[#EBEEF5]"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="mx-20">
         <Navbar />
-        <div className="flex flex-col gap-5 w-[588px] mt-[60px]">
-          <h1 className="text-[64px]">MailHereko</h1>
-          <p className="text-[16px] font-normal">
+
+        <motion.div
+          className="flex flex-col gap-5 w-[588px] mt-[60px]"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.15 } },
+          }}
+        >
+          <motion.h1
+            className="text-[64px]"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+          >
+            MailHereko
+          </motion.h1>
+
+          <motion.p
+            className="text-[16px] font-normal"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+          >
             List of movies and TV Shows, I, Pramod Poudel have watched till
             date. Explore what I have watched and also feel free to make a
             suggestion. 😉
-          </p>
+          </motion.p>
 
-          <div className="relative w-[344px]">
+          <motion.div
+            className="relative w-[344px]"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+          >
             <button
               onClick={handleSearch}
               className="absolute hover:cursor-pointer top-1/2 left-3 -translate-y-1/2"
@@ -82,9 +135,7 @@ export default function Root() {
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value);
-                if (e.target.value.trim() === "") {
-                  handleReset();
-                }
+                if (e.target.value.trim() === "") handleReset();
               }}
               onKeyDown={handleKeyDown}
               placeholder="Search Movies or TV Shows"
@@ -99,31 +150,58 @@ export default function Root() {
                 <XIcon className="w-5 h-5" />
               </button>
             )}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="mt-10">
+        <motion.div
+          className="mt-10"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <GenreList />
-        </div>
+        </motion.div>
+
         {error && <p className="mt-6 ml-2 text-xl">{error}</p>}
-        {movies.length > 0 ? (
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 mb-5 gap-6">
-            {movies.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                poster={movie.poster}
-                imdb_rating={movie.imdb_rating}
-              />
-            ))}
-          </div>
+
+        {isSearching ? (
+          loadingSearch ? (
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+              {Array.from({ length: 8 }).map((_, idx) => (
+                <MovieCardSkeleton key={idx} />
+              ))}
+            </div>
+          ) : (
+            movies.length > 0 && (
+              <div className="mt-8 grid mb-5 grid-cols-2 md:grid-cols-4 gap-6">
+                {movies.map((m) => (
+                  <MovieCard
+                    key={m.id}
+                    id={m.id}
+                    title={m.title}
+                    poster={m.poster}
+                    imdb_rating={m.imdb_rating}
+                  />
+                ))}
+              </div>
+            )
+          )
         ) : (
-          <div className="mt-10">
-            <Outlet />
+          <div className="mt-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={location.pathname}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                <Outlet />
+              </motion.div>
+            </AnimatePresence>
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
