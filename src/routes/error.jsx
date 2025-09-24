@@ -7,12 +7,19 @@ import {
   NavbarLink,
 } from "flowbite-react";
 import { useRouteError } from "react-router";
+import { motion } from "framer-motion";
 
 export default function ErroPage() {
   const error = useRouteError();
 
   return (
-    <div className="h-svh max-w-[1440px]  mx-auto">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="h-svh max-w-[1440px]  mx-auto"
+    >
       <div>
         <Navbar fluid className="bg-[#00000033]">
           <NavbarBrand href="#">
@@ -47,6 +54,6 @@ export default function ErroPage() {
           </Button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
