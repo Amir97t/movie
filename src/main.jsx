@@ -6,12 +6,14 @@ import Home, { HomeLoader } from "./routes/home.jsx";
 import ErroPage from "./routes/error.jsx";
 import MovieByGenre, { MovieByGenreLoader } from "./routes/movieByGenre.jsx";
 import MoviePage, { MovieLoader } from "./routes/movie.jsx";
+import "./i18n";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
     errorElement: <ErroPage />,
+    HydrateFallback: () => <p>Loading...</p>,
     children: [
       {
         index: true,
