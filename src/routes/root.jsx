@@ -1,4 +1,3 @@
-// src/routes/root.jsx
 import { useState } from "react";
 import { Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
