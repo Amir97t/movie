@@ -1,9 +1,9 @@
 import axios from "axios";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default async function getMoviesByGenre(genreName, page = 1) {
   try {
     const res = await axios.get(
-      `https://moviesapi.codingfront.dev/api/v1/genres/${genreName}/movies?page=${page}`
+      `${BASE_URL}/genres/${genreName}/movies?page=${page}`
     );
     return res.data.data; 
   } catch (err) {

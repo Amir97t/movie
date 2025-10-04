@@ -1,9 +1,10 @@
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default async function getMovieById(movieId) {
   try {
     const response = await axios.get(
-      `https://moviesapi.codingfront.dev/api/v1/movies/${movieId}`
+      `${BASE_URL}/movies/${movieId}`
     );
     return response.data;
   } catch (error) {
