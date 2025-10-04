@@ -6,6 +6,7 @@ import GenreList from "../components/GenreList";
 import getMovieBySearch from "../api/getMoviesBySearch";
 import MovieCard from "../components/MovieCard";
 import MovieCardSkeleton from "../components/MovieCardSkeleton";
+import { useTranslation } from "react-i18next";
 
 const XIcon = ({ className }) => (
   <svg
@@ -26,6 +27,7 @@ const XIcon = ({ className }) => (
 
 export default function Root() {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -106,9 +108,7 @@ export default function Root() {
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
             }}
           >
-            List of movies and TV Shows, I, Pramod Poudel have watched till
-            date. Explore what I have watched and also feel free to make a
-            suggestion. 😉
+            {t("home.description")}
           </motion.p>
 
           <motion.div
