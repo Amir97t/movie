@@ -43,7 +43,7 @@ export default function MovieByGenre() {
 
   if (isFirstLoading) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-12 mt-5">
         {[...Array(8)].map((_, idx) => (
           <MovieCardSkeleton key={idx} />
         ))}
@@ -59,7 +59,7 @@ export default function MovieByGenre() {
         next={fetchMoreMovies}
         hasMore={hasMore}
         loader={
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-5 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 mt-5 justify-items-center">
             {[...Array(4)].map((_, idx) => (
               <MovieCardSkeleton key={idx} />
             ))}
@@ -72,7 +72,7 @@ export default function MovieByGenre() {
         }
         style={{ overflow: "visible" }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center">
           <MovieList movies={movies} />
         </div>
       </InfiniteScroll>

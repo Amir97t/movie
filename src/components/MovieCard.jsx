@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 export default function MovieCard({ id, title, poster, imdb_rating }) {
   return (
     <div className="relative w-[282px]  h-[480px]">
-      <div className="absolute top-3  left-3 w-14 h-10 rounded 
+      <div
+        className="absolute top-3  left-3 w-14 h-10 rounded 
       bg-[#000000A6] text-[#FFAD49] flex items-center
-      justify-center gap-1">
+      justify-center gap-1"
+      >
         <img
           className="h-4 w-4"
           src="../src/assets/star.svg"

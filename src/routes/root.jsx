@@ -41,7 +41,7 @@ export default function Root() {
       setLoadingSearch(true);
       const results = await getMovieBySearch(q);
       if (!results || results.length === 0) {
-        setError("We couldn't find that movie. Did you mean something else?");
+        ("We couldn't find that movie. Did you mean something else?");
         setMovies([]);
       } else {
         setError("");
@@ -73,17 +73,16 @@ export default function Root() {
 
   return (
     <motion.div
-      className="w-[1440px] mx-auto text-[#EBEEF5]"
+      className="w-full max-w-[1440px] mx-auto text-[#EBEEF5]"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 30 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="mx-20">
+      <div className="lg:mx-20 md:mx-15 mx-3">
         <Navbar />
-
         <motion.div
-          className="flex flex-col gap-5 w-[588px] mt-[60px]"
+          className="flex items-center text-center md:items-start md:text-left flex-col gap-5 lg:w-[588px] mt-[60px] "
           initial="hidden"
           animate="visible"
           variants={{
@@ -92,13 +91,13 @@ export default function Root() {
           }}
         >
           <motion.h1
-            className="text-[64px]"
+            className="text-[64px] sm:text-[48px] md:text-[64px] font-semibold"
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
             }}
           >
-            MailHereko
+            {t("home.title")}
           </motion.h1>
 
           <motion.p
@@ -137,7 +136,7 @@ export default function Root() {
                 if (e.target.value.trim() === "") handleReset();
               }}
               onKeyDown={handleKeyDown}
-              placeholder="Search Movies or TV Shows"
+              placeholder={t("home.search")}
               className="w-full h-[64px] pl-10 pr-10 rounded-lg bg-[#1c2236] text-white border border-gray-600"
             />
 
@@ -165,14 +164,14 @@ export default function Root() {
 
         {isSearching ? (
           loadingSearch ? (
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div>
               {Array.from({ length: 8 }).map((_, idx) => (
                 <MovieCardSkeleton key={idx} />
               ))}
             </div>
           ) : (
             movies.length > 0 && (
-              <div className="mt-8 grid mb-5 grid-cols-2 md:grid-cols-4 gap-6">
+              <div>
                 {movies.map((m) => (
                   <MovieCard
                     key={m.id}

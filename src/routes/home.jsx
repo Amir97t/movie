@@ -37,7 +37,7 @@ export default function Home() {
 
   if (!allMovies.length) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-5">
         {Array.from({ length: 8 }).map((_, idx) => (
           <MovieCardSkeleton key={idx} />
         ))}
@@ -46,24 +46,24 @@ export default function Home() {
   }
 
   return (
-    <div className="mt-5 w-[1300px]  text-[#EBEEF5]">
+    <div className="mt-5  text-[#EBEEF5]">
       <InfiniteScroll
         dataLength={allMovies.length}
         next={fetchMoreMovies}
         hasMore={hasMore}
         loader={
-          <div className="grid grid-cols-2 md:grid-cols-4  mt-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-5 gap-x-12 justify-items-center">
             {Array.from({ length: 4 }).map((_, idx) => (
               <MovieCardSkeleton key={idx} />
             ))}
           </div>
         }
         endMessage={
-          <p className="text-center mt-4">🎬 No more item on the list</p>
+          <p className="text-center my-4">🎬 No more item on the list</p>
         }
         style={{ overflow: "visible" }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-12 justify-items-center">
           <MovieList movies={allMovies} />
         </div>
       </InfiniteScroll>
