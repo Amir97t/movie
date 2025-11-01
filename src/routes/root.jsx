@@ -137,7 +137,7 @@ export default function Root() {
               }}
               onKeyDown={handleKeyDown}
               placeholder={t("home.search")}
-              className="w-full h-[64px] pl-10 pr-10 rounded-lg bg-[#1c2236] text-white border border-gray-600"
+              className="w-full h-[64px] pl-10 pr-10 rounded-lg bg-[#1c2236] text-white border border-[#8E95A9]"
             />
 
             {query && (
@@ -164,14 +164,14 @@ export default function Root() {
 
         {isSearching ? (
           loadingSearch ? (
-            <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center my-6">
               {Array.from({ length: 8 }).map((_, idx) => (
                 <MovieCardSkeleton key={idx} />
               ))}
             </div>
           ) : (
             movies.length > 0 && (
-              <div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center my-6">
                 {movies.map((m) => (
                   <MovieCard
                     key={m.id}

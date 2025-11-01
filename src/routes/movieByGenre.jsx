@@ -59,20 +59,20 @@ export default function MovieByGenre() {
         next={fetchMoreMovies}
         hasMore={hasMore}
         loader={
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 mt-5 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center my-6">
             {[...Array(4)].map((_, idx) => (
               <MovieCardSkeleton key={idx} />
             ))}
           </div>
         }
         endMessage={
-          <p className="text-center mt-4 text-[#EBEEF5]">
+          <p className="text-center my-4 text-[#EBEEF5]">
             🎬 No More Item On The List
           </p>
         }
         style={{ overflow: "visible" }}
       >
-        <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center my-6">
           <MovieList movies={movies} />
         </div>
       </InfiniteScroll>

@@ -6,6 +6,7 @@ import Home, { HomeLoader } from "./routes/home.jsx";
 import ErroPage from "./routes/error.jsx";
 import MovieByGenre, { MovieByGenreLoader } from "./routes/movieByGenre.jsx";
 import MoviePage, { MovieLoader } from "./routes/movie.jsx";
+import RandomMovies from "./components/RandomMovies.jsx";
 import "./i18n";
 
 const router = createBrowserRouter([
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
         Component: Home,
         loader: HomeLoader,
       },
+      { path: "random", Component: RandomMovies },
       {
         path: "genres/:genre",
         Component: MovieByGenre,

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function AppBar() {
   return (
     <Navbar className="bg-[#00000033] font-[Poppins] w-full rounded-lg backdrop-blur-md">
-      <NavbarBrand href="#">
+      <NavbarBrand as={Link} to="/">
         <img
           src="../src/assets/icon-tab.svg"
           className="h-6 sm:h-8 md:h-9"
@@ -18,14 +18,14 @@ export default function AppBar() {
         />
       </NavbarBrand>
 
-      <NavbarToggle className="text-[#7B6EF6] hover:cursor-pointer hover:bg-[#ffffff22] " />
-      <NavbarCollapse className="text-center  md:text-left">
+      <NavbarToggle className="text-[#7B6EF6] hover:cursor-pointer hover:bg-[#ffffff22]" />
+      <NavbarCollapse className="text-center md:text-left">
         <NavbarLink
           className="text-white hover:cursor-pointer hover:text-[#7B6EF6]"
           as={Link}
-          to="/all"
+          to="random"
         >
-          Movies
+          Random
         </NavbarLink>
         <NavbarLink
           className="text-white hover:cursor-pointer hover:text-[#7B6EF6]"

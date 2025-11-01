@@ -26,11 +26,11 @@ export default function Genres() {
 
   return (
     <>
-      <div className="block sm:hidden mt-5">
+      <div className="block lg:hidden mt-5 ">
         <select
           value={selected}
           onChange={handleChange}
-          className="w-full bg-[#00000033] text-[#EBEEF5] p-3 rounded-lg border border-gray-600"
+          className="w-full bg-[#00000033]text-[#EBE9FE] hover:bg-[#7B6EF6]  hover:cursor-pointer p-3 rounded-lg border border-[#8E95A9]"
         >
           <option value="all">All</option>
           {genres.map((genre, index) => (
@@ -41,8 +41,7 @@ export default function Genres() {
         </select>
       </div>
 
-    
-      <ul className="hidden sm:grid sm:grid-cols-3 lg:flex lg:flex-wrap gap-2.5 text-[16px] mt-6 font-[Poppins] bg-[#00000033] p-2 rounded-[12px]">
+      <ul className="hidden  lg:flex lg:flex-wrap gap-2.5 text-[16px] mt-6 font-[Poppins] bg-[#00000033] p-2 rounded-[12px]">
         <li>
           <NavLink
             to={"/all"}
