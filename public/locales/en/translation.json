@@ -2,6 +2,10 @@
   "home": {
     "description": "List of movies and TV Shows, I, Pramod Poudel have watched till date. Explore what I have watched and also feel free to make a suggestion. 😉",
     "search": "Search Movies or TV Shows",
-    "title": "MaileHereko"
+    "title": "MaileHereko",
+    "nav_random": "Random Movies",
+    "nav_middle": "TV Shows",
+    "nav_home": "Home",
+    "error": "We couldn't find that movie. Did you mean something else?"
   }
 }

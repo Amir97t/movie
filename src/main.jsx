@@ -38,6 +38,7 @@ const router = createBrowserRouter([
     path: "movies/:id",
     Component: MoviePage,
     loader: MovieLoader,
+    children: [{ path: "random", Component: RandomMovies }],
   },
 ]);
 

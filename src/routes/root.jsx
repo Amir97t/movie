@@ -27,7 +27,7 @@ const XIcon = ({ className }) => (
 
 export default function Root() {
   const location = useLocation();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -41,7 +41,11 @@ export default function Root() {
       setLoadingSearch(true);
       const results = await getMovieBySearch(q);
       if (!results || results.length === 0) {
-        ("We couldn't find that movie. Did you mean something else?");
+        setError(
+          <div className={`${i18n.language === "fa" ? "text-right" : ""}`}>
+            {t("home.error")}
+          </div>
+        );
         setMovies([]);
       } else {
         setError("");
@@ -82,7 +86,12 @@ export default function Root() {
       <div className="lg:mx-20 md:mx-15 mx-3">
         <Navbar />
         <motion.div
-          className="flex items-center text-center md:items-start md:text-left flex-col gap-5 lg:w-[588px] mt-[60px] "
+          dir={i18n.language === "fa" ? "rtl" : "ltr"}
+          className={`flex items-center text-center md:items-start md:text-left flex-col gap-5 lg:w-[588px] mt-[60px]  ${
+            i18n.language === "fa"
+              ? "ml-auto text-right items-end"
+              : "text-left items-start"
+          }`}
           initial="hidden"
           animate="visible"
           variants={{
@@ -101,7 +110,9 @@ export default function Root() {
           </motion.h1>
 
           <motion.p
-            className="text-[16px] font-normal"
+            className={`text-[16px] font-normal ${
+              i18n.language === "fa" ? "text-right" : ""
+            }`}
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -137,7 +148,7 @@ export default function Root() {
               }}
               onKeyDown={handleKeyDown}
               placeholder={t("home.search")}
-              className="w-full h-[64px] pl-10 pr-10 rounded-lg bg-[#1c2236] text-white border border-[#8E95A9]"
+              className="w-full h-16 pl-10 pr-10 rounded-lg bg-[#1c2236] text-white border border-[#8E95A9]"
             />
 
             {query && (
@@ -145,7 +156,7 @@ export default function Root() {
                 onClick={handleReset}
                 className="absolute hover:cursor-pointer top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-red-500"
               >
-                <XIcon className="w-5 h-5" />
+                <XIcon className={`w-5 h-5 ${i18n.language === "fa" ? "right-3" : ""}`} />
               </button>
             )}
           </motion.div>
