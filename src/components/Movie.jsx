@@ -16,10 +16,9 @@ export default function Movie({ movie }) {
   } = movie;
 
   return (
-     
     <div className="max-w-[1200px] mx-auto text-[#EBEEF5] px-4 sm:px-6 md:px-8 overflow-hidden">
-        <NavBar />
-      
+      <NavBar />
+
       <motion.div
         className="mt-10"
         initial={{ opacity: 0, y: -30 }}
@@ -28,7 +27,7 @@ export default function Movie({ movie }) {
       >
         <div className="relative">
           <img
-            className="w-full h-[240px] sm:h-[360px] md:h-[460px] rounded-[24px] sm:rounded-[32px] md:rounded-[42px] shadow-lg object-cover"
+            className="w-full h-60 sm:h-[360px] md:h-[460px] rounded-3xl sm:rounded-4xl md:rounded-[42px] shadow-lg object-cover"
             src={images}
             alt="movie-cover"
           />
