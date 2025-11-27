@@ -8,12 +8,16 @@ import {
 import { Link } from "react-router-dom";
 import LanguageSwitch from "./LanguageSwitch";
 import { useTranslation } from "react-i18next";
+import theme from "../theme";
 
 export default function AppBar() {
   const { t, i18n } = useTranslation();
 
   return (
-    <Navbar className="bg-[#00000033] font-[Poppins] w-full rounded-lg backdrop-blur-md">
+    <Navbar
+      theme={theme.navbar}
+      className="bg-[#00000033] font-[Poppins] w-full rounded-lg backdrop-blur-md"
+    >
       <NavbarBrand>
         <Link to="/">
           <img
@@ -22,22 +26,22 @@ export default function AppBar() {
             alt="Logo"
           />
         </Link>
-        <LanguageSwitch as={Link} to="" />
+        <LanguageSwitch />
       </NavbarBrand>
       <NavbarToggle className="text-[#7B6EF6] hover:cursor-pointer hover:bg-[#ffffff22]" />
       <NavbarCollapse className="text-center md:text-left">
         <NavbarLink
-          className={`text-white hover:cursor-pointer hover:text-[#7B6EF6] ${
+          className={`text-white hover:cursor-pointer  ${
             i18n.language === "fa" ? "text-[15px]" : ""
           }`}
           as={Link}
-          to="random"
+          to="/random"
         >
           {t("home.nav_random")}
         </NavbarLink>
 
         <NavbarLink
-          className={`text-white hover:cursor-pointer hover:text-[#7B6EF6] ${
+          className={`text-white hover:cursor-pointer ${
             i18n.language === "fa" ? "text-[15px]" : ""
           }`}
           href="#"
@@ -46,7 +50,7 @@ export default function AppBar() {
         </NavbarLink>
 
         <NavbarLink
-          className={`flex justify-center md:justify-start text-white gap-2 hover:text-[#7B6EF6] hover:cursor-pointer ${
+          className={`flex justify-center md:justify-start text-white gap-2 hover:cursor-pointer ${
             i18n.language === "fa" ? "text-base" : ""
           }`}
           as={Link}
