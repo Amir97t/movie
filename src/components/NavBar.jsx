@@ -14,15 +14,16 @@ export default function AppBar() {
 
   return (
     <Navbar className="bg-[#00000033] font-[Poppins] w-full rounded-lg backdrop-blur-md">
-      <NavbarBrand as={Link} to="/">
-        <img
-          src="../src/assets/icon-tab.svg"
-          className="h-6 sm:h-8 md:h-9"
-          alt="Logo"
-        />
-        <LanguageSwitch />
+      <NavbarBrand>
+        <Link to="/">
+          <img
+            src="../src/assets/icon-tab.svg"
+            className="h-6 sm:h-8 md:h-9"
+            alt="Logo"
+          />
+        </Link>
+        <LanguageSwitch as={Link} to="" />
       </NavbarBrand>
-
       <NavbarToggle className="text-[#7B6EF6] hover:cursor-pointer hover:bg-[#ffffff22]" />
       <NavbarCollapse className="text-center md:text-left">
         <NavbarLink

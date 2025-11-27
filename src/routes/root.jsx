@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "../components/NavBar";
@@ -33,6 +33,18 @@ export default function Root() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
   const [loadingSearch, setLoadingSearch] = useState(false);
+  const [tempAnimation, setTempAnimation] = useState({
+    paddingLeft: 0,
+    paddingRight: 0,
+  });
+
+  useEffect(() => {
+    if (i18n.language === "fa") {
+      setTempAnimation({ paddingRight: 20, paddingLeft: 0 });
+    } else {
+      setTempAnimation({ paddingRight: 0, paddingLeft: 20 });
+    }
+  }, [i18n.language]);
 
   const handleSearch = async () => {
     const q = query.trim();
@@ -87,13 +99,24 @@ export default function Root() {
         <Navbar />
         <motion.div
           dir={i18n.language === "fa" ? "rtl" : "ltr"}
-          className={`flex items-center text-center md:items-start md:text-left flex-col gap-5 lg:w-[588px] mt-[60px]  ${
+          className={`flex  items-center text-center md:items-start md:text-left flex-col gap-y-5 lg:w-[588px] mt-[60px] ${
             i18n.language === "fa"
-              ? "ml-auto text-right items-end"
+              ? "ml-auto mr-2.5 text-right items-end"
               : "text-left items-start"
           }`}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 5, x: 5 }}
+          animate={{
+            opacity: 1,
+            ...tempAnimation, 
+          }}
+          onAnimationComplete={() => {
+           
+            setTempAnimation({ paddingLeft: 0, paddingRight: 0 });
+          }}
+          transition={{
+            duration: 0.35,
+            ease: "easeInOut",
+          }}
           variants={{
             hidden: {},
             visible: { transition: { staggerChildren: 0.15 } },
@@ -123,6 +146,12 @@ export default function Root() {
 
           <motion.div
             className="relative w-[344px]"
+            animate={
+              {
+                // opacity: 1,
+                // x: i18n.language === "fa" ? 2 : 0,
+              }
+            }
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -156,7 +185,7 @@ export default function Root() {
                 onClick={handleReset}
                 className="absolute hover:cursor-pointer top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-red-500"
               >
-                <XIcon className={`w-5 h-5 ${i18n.language === "fa" ? "right-3" : ""}`} />
+                <XIcon className={`w-5 h-5`} />
               </button>
             )}
           </motion.div>
