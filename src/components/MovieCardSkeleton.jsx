@@ -1,6 +1,6 @@
 export default function MovieCardSkeleton() {
   return (
-    <div className="w-[282px] h-[480px] max-w-sm rounded-lg bg-gray-800 animate-pulse">
+    <div className="w-[282px] h-[500px] max-w-sm rounded-lg bg-gray-800 animate-pulse">
       <div className="h-[400px] bg-gray-700 rounded-t-lg"></div>
       <div className="p-4 space-y-3">
         <div className="h-3 bg-gray-700 rounded w-3/4"></div>
