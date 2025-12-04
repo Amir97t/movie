@@ -26,11 +26,11 @@ export default function Genres() {
 
   return (
     <>
-      <div className="block lg:hidden mt-5 ">
+      <div className="block lg:hidden mt-5">
         <select
           value={selected}
           onChange={handleChange}
-          className="w-full bg-[#00000033]text-[#EBE9FE] hover:bg-[#7B6EF6]  hover:cursor-pointer p-3 rounded-lg border border-[#8E95A9]"
+          className="w-full  text-[#EBE9FE] bg-gray-900  p-3 rounded-lg border border-[#8E95A9]"
         >
           <option value="all">All</option>
           {genres.map((genre, index) => (
@@ -41,12 +41,12 @@ export default function Genres() {
         </select>
       </div>
 
-      <ul className="hidden  lg:flex lg:flex-wrap gap-2.5 text-[16px] mt-6 font-[Poppins] bg-[#00000033] p-2 rounded-[12px]">
+      <ul className="hidden lg:flex lg:flex-wrap gap-2.5 text-[16px] mt-6 font-[Poppins] bg-[#00000033] p-2 rounded-xl">
         <li>
           <NavLink
             to={"/all"}
             className={({ isActive }) =>
-              `block text-center px-6 py-2 rounded-[8px] transition ${
+              `block text-center px-6 py-2 rounded-lg transition ${
                 isActive
                   ? "bg-[#7B6EF6] text-[#EBE9FE]"
                   : "text-[#8E95A9] hover:bg-[#7B6EF6] hover:text-[#EBE9FE]"
@@ -61,7 +61,7 @@ export default function Genres() {
             <NavLink
               to={`/genres/${genre.name}`}
               className={({ isActive }) =>
-                `block text-center px-6 py-2 rounded-[8px] transition ${
+                `block text-center px-6 py-2 rounded-lg transition ${
                   isActive
                     ? "bg-[#7B6EF6] text-[#EBE9FE]"
                     : "text-[#8E95A9] hover:bg-[#7B6EF6] hover:text-[#EBE9FE]"
