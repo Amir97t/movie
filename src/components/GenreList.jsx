@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import getGenres from "../api/getGenres";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { genreTranslate } from "../utiles/genreTranslate";
 
 export default function Genres() {
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState("all");
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     setLoading(true);
@@ -15,6 +18,11 @@ export default function Genres() {
       setLoading(false);
     });
   }, []);
+
+  const getGenreName = (name) => {
+    if (genreTranslate[name]) return genreTranslate[name][i18n.language];
+    return name;
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -26,22 +34,25 @@ export default function Genres() {
 
   return (
     <>
-      <div className="block lg:hidden mt-5">
+      <div className="block lg:hidden mt-5 hover:text-[#7B6EF6]">
         <select
           value={selected}
           onChange={handleChange}
-          className="w-full  text-[#EBE9FE] bg-gray-900  p-3 rounded-lg border border-[#8E95A9]"
+          className="w-full text-[#EBE9FE] bg-gray-900 p-3 rounded-lg border border-[#8E95A9]"
         >
-          <option value="all">All</option>
+          <option value="all">{i18n.language === "fa" ? "همه" : "All"}</option>
+
           {genres.map((genre, index) => (
             <option key={index} value={genre.name}>
-              {genre.name}
+              {getGenreName(genre.name)}
             </option>
           ))}
         </select>
       </div>
-
-      <ul className="hidden lg:flex lg:flex-wrap gap-2.5 text-[16px] mt-6 font-[Poppins] bg-[#00000033] p-2 rounded-xl">
+      <ul
+        dir={i18n.language === "fa" ? "rtl" : "ltr"}
+        className="hidden lg:flex lg:flex-wrap gap-2.5 text-[16px] mt-6 font-[Poppins] bg-[#00000033] p-2 rounded-xl"
+      >
         <li>
           <NavLink
             to={"/all"}
@@ -53,9 +64,10 @@ export default function Genres() {
               }`
             }
           >
-            All
+            {i18n.language === "fa" ? "همه" : "All"}
           </NavLink>
         </li>
+
         {genres.map((genre, index) => (
           <li key={index}>
             <NavLink
@@ -68,7 +80,7 @@ export default function Genres() {
                 }`
               }
             >
-              {genre.name}
+              {getGenreName(genre.name)}
             </NavLink>
           </li>
         ))}
