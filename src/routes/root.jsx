@@ -107,10 +107,9 @@ export default function Root() {
           initial={{ opacity: 5, x: 5 }}
           animate={{
             opacity: 1,
-            ...tempAnimation, 
+            ...tempAnimation,
           }}
           onAnimationComplete={() => {
-           
             setTempAnimation({ paddingLeft: 0, paddingRight: 0 });
           }}
           transition={{
@@ -145,13 +144,12 @@ export default function Root() {
           </motion.p>
 
           <motion.div
-            className="relative w-[344px]"
-            animate={
-              {
-                // opacity: 1,
-                // x: i18n.language === "fa" ? 2 : 0,
-              }
-            }
+            c
+            className={`relative w-[344px] ${
+              i18n.language === "fa"
+                ? "ml-auto mr-0 text-right"
+                : "mr-auto ml-0 text-left"
+            }`}
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -159,7 +157,9 @@ export default function Root() {
           >
             <button
               onClick={handleSearch}
-              className="absolute hover:cursor-pointer top-1/2 left-3 -translate-y-1/2"
+              cl
+              className={`absolute hover:cursor-pointer top-1/2 -translate-y-1/2
+              ${i18n.language === "fa" ? "right-3" : "left-3"}`}
             >
               <img
                 src="../src/assets/searchIcon.svg"
@@ -169,6 +169,7 @@ export default function Root() {
             </button>
 
             <input
+              dir={i18n.language === "fa" ? "rtl" : "ltr"}
               type="text"
               value={query}
               onChange={(e) => {
@@ -183,7 +184,9 @@ export default function Root() {
             {query && (
               <button
                 onClick={handleReset}
-                className="absolute hover:cursor-pointer top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-red-500"
+                className={`absolute hover:cursor-pointer top-1/2 -translate-y-1/2 
+               ${i18n.language === "fa" ? "left-3" : "right-3"}
+              text-gray-400 hover:text-red-500`}
               >
                 <XIcon className={`w-5 h-5`} />
               </button>
