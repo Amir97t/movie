@@ -1,28 +1,71 @@
 import { useTranslation } from "react-i18next";
 
-export default function LanguageSwitch() {
+const LanguageSwitch = () => {
   const { i18n } = useTranslation();
+  const isFa = i18n.language === "fa";
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === "fa" ? "en" : "fa";
+  const handleToggle = () => {
+    const newLang = isFa ? "en" : "fa";
     i18n.changeLanguage(newLang);
+    localStorage.setItem("lang", newLang);
   };
 
   return (
-    <button
-      onClick={toggleLanguage}
-      className="flex gap-2 hover:cursor-pointer bg-gray-200 dark:bg-gray-700 px-3 py-1.5 rounded-full shadow-sm transition hover:bg-gray-300 dark:hover:bg-gray-600"
+    <div
+      className="relative"
+      style={{
+        width: "80px",
+        height: "35px",
+      }}
     >
-      <div
-        className={`w-5 h-5 rounded-full  transition-all duration-300 ${
-          i18n.language === "fa"
-            ? "bg-green-600  translate-x-18"
-            : "bg-blue-600"
-        }`}
-      ></div>
-      <span className="text-sm font-medium  px-2 mr-4 text-white">
-        {i18n.language === "fa" ? "فارسی" : "English"}
-      </span>
-    </button>
+      <button
+        onClick={handleToggle}
+        className="absolute  hover:cursor-pointer inset-0 rounded-full bg-slate-200 overflow-hidden"
+        style={{
+          boxShadow: "0 0 0 transparent",
+        }}
+      >
+        <div
+          className={`
+            absolute top-1 left-1
+            w-8 h-7 rounded-full z-20
+            flex items-center justify-center text-white text-sm font-bold
+            transition-transform duration-300
+            ${
+              isFa
+                ? "translate-x-11 bg-linear-to-r from-purple-500 to-indigo-600"
+                : "translate-x-0 bg-linear-to-r from-blue-500 to-cyan-500"
+            }
+          `}
+          style={{
+            boxShadow: "0 2px 5px rgba(0,0,0,0.35)",
+          }}
+        >
+          {isFa ? "فا" : "EN"}
+        </div>
+
+        <span
+          className={`
+            absolute left-3 top-1/2 -translate-y-1/2
+            text-sm transition duration-300 z-10
+            ${isFa ? "text-slate-500" : "text-black font-bold"}
+          `}
+        >
+          EN
+        </span>
+
+        <span
+          className={`
+            absolute right-3 top-1/2 -translate-y-1/2
+            text-sm transition duration-300 z-10
+            ${isFa ? "text-black font-bold" : "text-slate-500"}
+          `}
+        >
+          فا
+        </span>
+      </button>
+    </div>
   );
-}
+};
+
+export default LanguageSwitch;
