@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import getAllMovies from "../api/getAllMovies";
 import MovieList from "../components/MovieList";
 import MovieCardSkeleton from "../components/MovieCardSkeleton";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 
 export async function HomeLoader() {
   const movies = await getAllMovies(1);
@@ -67,6 +68,7 @@ export default function Home() {
           <MovieList movies={allMovies} />
         </div>
       </InfiniteScroll>
+      <ScrollToTopButton />
     </div>
   );
 }
