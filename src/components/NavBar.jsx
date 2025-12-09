@@ -18,16 +18,16 @@ export default function AppBar() {
       theme={theme.navbar}
       className="bg-[#00000033] font-[Poppins] w-full rounded-lg backdrop-blur-md"
     >
-      <NavbarBrand>
-        <Link to="/">
+      <span className="flex items-center gap-3">
+        <NavbarBrand as={Link} to="/">
           <img
             src="../src/assets/icon-tab.svg"
             className="h-6 sm:h-8 md:h-9"
             alt="Logo"
           />
-        </Link>
+        </NavbarBrand>
         <LanguageSwitch />
-      </NavbarBrand>
+      </span>
       <NavbarToggle className="text-[#7B6EF6] hover:cursor-pointer hover:bg-[#ffffff22]" />
       <NavbarCollapse className="text-center md:text-left">
         <NavbarLink
