@@ -20,5 +20,5 @@ export const genreTranslate = {
   Biography: { fa: "بیوگرافی", en: "Biography" },
   "Film-Noir": { fa: "فیلم / نوآر", en: "Film-Noir" },
   Sport: { fa: "ورزشی", en: "Sport" },
-  "Sci-fi": { fa: "علمی-تخیلی", en: "Sci-fi" },
+  "Sci-Fi": { fa: "علمی- تخیلی", en: "Sci-fi" },
 };
