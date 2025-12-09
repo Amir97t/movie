@@ -144,7 +144,6 @@ export default function Root() {
           </motion.p>
 
           <motion.div
-            c
             className={`relative w-[344px] ${
               i18n.language === "fa"
                 ? "ml-auto mr-0 text-right"
@@ -157,7 +156,6 @@ export default function Root() {
           >
             <button
               onClick={handleSearch}
-              cl
               className={`absolute hover:cursor-pointer top-1/2 -translate-y-1/2
               ${i18n.language === "fa" ? "right-3" : "left-3"}`}
             >
