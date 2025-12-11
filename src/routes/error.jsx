@@ -19,7 +19,7 @@ export default function ErroPage() {
       <div className="lg:mx-20 md:mx-15 mx-3">
         <NavBar />
         <div className="items-center text-center mt-15 text-white grid place-items-center gap-4">
-          <img src="src/assets/error.svg" className="w-[400px] h-80" />
+          <img src="/icons/error.svg" className="w-[400px] h-80" />
           <h2 className="font-[Poppins] text-5xl">
             {t("errorPage.error_route_title")}
           </h2>
