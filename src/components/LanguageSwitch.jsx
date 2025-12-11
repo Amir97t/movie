@@ -14,7 +14,7 @@ const LanguageSwitch = () => {
     <div
       className="relative"
       style={{
-        width: "80px",
+        width: "85px",
         height: "35px",
       }}
     >

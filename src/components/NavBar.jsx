@@ -12,26 +12,35 @@ import theme from "../theme";
 
 export default function AppBar() {
   const { t, i18n } = useTranslation();
-
+  const isFA = i18n.language === "fa";
+  const fontClass = isFA ? "font-fa" : "font-en";
+  
   return (
     <Navbar
       theme={theme.navbar}
-      className="bg-[#00000033] font-[Poppins] w-full rounded-lg backdrop-blur-md"
+      className={`bg-[#00000033] ${fontClass} w-full rounded-lg backdrop-blur-md`}
     >
-      <div className="flex items-center">
+      <span className="flex items-center gap-3">
         <NavbarBrand as={Link} to="/">
-          <span>
-            <img
-              src="../src/assets/icon-tab.svg"
-              className="h-6 sm:h-8 md:h-9"
-              alt="Logo"
-            />
-          </span>
+          <img
+            src="../src/assets/icon-tab.svg"
+            className="h-6 sm:h-8 md:h-9"
+            alt="Logo"
+          />
         </NavbarBrand>
         <LanguageSwitch />
-      </div>
-   
-     <NavbarToggle />
+      </span>
+      <NavbarToggle className="text-[#7B6EF6] hover:cursor-pointer hover:bg-[#ffffff22]" />
+      <NavbarCollapse className="text-center md:text-left">
+        <NavbarLink
+          className={`text-white hover:cursor-pointer  ${
+            i18n.language === "fa" ? "text-[15px]" : ""
+          }`}
+          as={Link}
+          to="/random"
+        >
+          {t("home.nav_random")}
+        </NavbarLink>
 
   <NavbarCollapse className="text-center md:text-left space-y-4 md:space-y-0">
     <NavbarLink

@@ -4,6 +4,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import getAllMovies from "../api/getAllMovies";
 import MovieList from "../components/MovieList";
 import MovieCardSkeleton from "../components/MovieCardSkeleton";
+import ScrollToTopButton from "../components/ScrollToTopButton";
+import { useTranslation } from "react-i18next";
 
 export async function HomeLoader() {
   const movies = await getAllMovies(1);
@@ -12,6 +14,8 @@ export async function HomeLoader() {
 
 export default function Home() {
   const { movies } = useLoaderData();
+
+  const { t } = useTranslation();
 
   const [allMovies, setAllMovies] = useState(movies.data || []);
   const [page, setPage] = useState(2);
@@ -58,15 +62,14 @@ export default function Home() {
             ))}
           </div>
         }
-        endMessage={
-          <p className="text-center my-4">🎬 No more item on the list</p>
-        }
+        endMessage={<p className="text-center my-4">{t("home.scroll")}</p>}
         style={{ overflow: "visible" }}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center my-6">
           <MovieList movies={allMovies} />
         </div>
       </InfiniteScroll>
+      <ScrollToTopButton />
     </div>
   );
 }

@@ -28,6 +28,8 @@ const XIcon = ({ className }) => (
 export default function Root() {
   const location = useLocation();
   const { t, i18n } = useTranslation();
+  const isFA = i18n.language === "fa";
+  const fontClass = isFA ? "font-fa" : "font-en";
 
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -99,7 +101,7 @@ export default function Root() {
         <Navbar />
         <motion.div
           dir={i18n.language === "fa" ? "rtl" : "ltr"}
-          className={`flex  items-center text-center md:items-start md:text-left flex-col gap-y-5 lg:w-[588px] mt-[60px] ${
+          className={`flex  items-center text-center ${fontClass} md:items-start md:text-left flex-col gap-y-5 lg:w-[588px] mt-[60px] ${
             i18n.language === "fa"
               ? "ml-auto mr-2.5 text-right items-end"
               : "text-left items-start"
@@ -144,7 +146,6 @@ export default function Root() {
           </motion.p>
 
           <motion.div
-            c
             className={`relative w-[344px] ${
               i18n.language === "fa"
                 ? "ml-auto mr-0 text-right"
@@ -157,7 +158,6 @@ export default function Root() {
           >
             <button
               onClick={handleSearch}
-              cl
               className={`absolute hover:cursor-pointer top-1/2 -translate-y-1/2
               ${i18n.language === "fa" ? "right-3" : "left-3"}`}
             >
