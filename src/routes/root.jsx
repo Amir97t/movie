@@ -124,7 +124,9 @@ export default function Root() {
           }}
         >
           <motion.h1
-            className="text-[64px] sm:text-[48px] md:text-[64px] font-semibold"
+            className={`text-[48px] ${
+              i18n.language === "fa" ? "ml-auto" : ""
+            } md:text-[64px] font-semibold`}
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -178,7 +180,7 @@ export default function Root() {
               }}
               onKeyDown={handleKeyDown}
               placeholder={t("home.search")}
-              className="w-full h-16 pl-10 pr-10 rounded-lg bg-[#1c2236] text-white border border-[#8E95A9]"
+              className="w-9/10 sm:w-full h-16 pl-10 pr-10 rounded-lg bg-[#1c2236] text-white border border-[#8E95A9]"
             />
 
             {query && (

@@ -5,6 +5,7 @@ import MovieList from "../components/MovieList";
 import MovieCardSkeleton from "../components/MovieCardSkeleton";
 import getMoviesByGenre from "../api/getMoviesByGenre";
 import { useTranslation } from "react-i18next";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 
 export async function MovieByGenreLoader({ params }) {
   const movies = await getMoviesByGenre(params.genre, 1);
@@ -77,6 +78,7 @@ export default function MovieByGenre() {
           <MovieList movies={movies} />
         </div>
       </InfiniteScroll>
+      <ScrollToTopButton />
     </div>
   );
 }

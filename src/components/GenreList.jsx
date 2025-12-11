@@ -39,6 +39,7 @@ export default function Genres() {
     <>
       <div className="block lg:hidden mt-5 hover:text-[#7B6EF6]">
         <select
+          dir={i18n.language === "fa" ? "rtl" : "ltr"}
           value={selected}
           onChange={handleChange}
           className={`w-full ${fontClass} text-[#EBE9FE] bg-gray-900 p-3 rounded-lg border border-[#8E95A9]`}
