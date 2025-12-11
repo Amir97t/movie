@@ -12,11 +12,13 @@ import theme from "../theme";
 
 export default function AppBar() {
   const { t, i18n } = useTranslation();
-
+  const isFA = i18n.language === "fa";
+  const fontClass = isFA ? "font-fa" : "font-en";
+  
   return (
     <Navbar
       theme={theme.navbar}
-      className="bg-[#00000033] font-[Poppins] w-full rounded-lg backdrop-blur-md"
+      className={`bg-[#00000033] ${fontClass} w-full rounded-lg backdrop-blur-md`}
     >
       <span className="flex items-center gap-3">
         <NavbarBrand as={Link} to="/">
