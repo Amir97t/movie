@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import MovieList from "../components/MovieList";
 import MovieCardSkeleton from "../components/MovieCardSkeleton";
 import getMoviesByGenre from "../api/getMoviesByGenre";
+import { useTranslation } from "react-i18next";
 
 export async function MovieByGenreLoader({ params }) {
   const movies = await getMoviesByGenre(params.genre, 1);
@@ -13,6 +14,8 @@ export async function MovieByGenreLoader({ params }) {
 export default function MovieByGenre() {
   const { genre } = useParams();
   const { movies: initialMovies } = useLoaderData();
+
+  const { t } = useTranslation();
 
   const [movies, setMovies] = useState(initialMovies || []);
   const [page, setPage] = useState(2);
@@ -66,9 +69,7 @@ export default function MovieByGenre() {
           </div>
         }
         endMessage={
-          <p className="text-center my-4 text-[#EBEEF5]">
-            🎬 No More Item On The List
-          </p>
+          <p className="text-center my-4 text-[#EBEEF5]">{t("home.scroll")}</p>
         }
         style={{ overflow: "visible" }}
       >

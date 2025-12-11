@@ -6,6 +6,12 @@
     "nav_random": "Random Movies",
     "nav_middle": "TV Shows",
     "nav_home": "Home",
-    "error": "We couldn't find that movie. Did you mean something else?"
+    "error": "We couldn't find that movie. Did you mean something else?",
+    "scroll": "🎬 No more item on the list"
+  },
+  "errorPage": {
+    "error_route_title": "Lost you'r way?",
+    "error_route_message": " --- Oops! This is awkward. You are looking for something that doesn't actually exist.",
+    "error_goBack": "Go Home"
   }
 }
