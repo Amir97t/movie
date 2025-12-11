@@ -164,7 +164,7 @@ export default function Root() {
               ${i18n.language === "fa" ? "right-3" : "left-3"}`}
             >
               <img
-                src="../public/icons/searchIcon.svg"
+                src="/icons/searchIcon.svg"
                 className="w-5 h-5"
                 alt="search"
               />

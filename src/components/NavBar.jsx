@@ -23,7 +23,7 @@ export default function AppBar() {
       <span className="flex items-center gap-3">
         <NavbarBrand as={Link} to="/">
           <img
-            src="../public/icons/icon-tab.svg"
+            src="icons/icon-tab.svg"
             className="h-6 sm:h-8 md:h-9"
             alt="Logo"
           />
@@ -60,7 +60,7 @@ export default function AppBar() {
           to="/"
         >
           {t("home.nav_home")}
-          <img src="../public/icons/arrow-right.svg" alt="arrow" />
+          <img src="/icons/arrow-right.svg" alt="arrow" />
         </NavbarLink>
       </NavbarCollapse>
     </Navbar>

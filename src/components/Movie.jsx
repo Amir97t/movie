@@ -71,7 +71,7 @@ export default function Movie({ movie }) {
           <div className="mt-6 space-y-4 text-sm sm:text-base lg:ml-6 ">
             <div className="flex justify-center  md:justify-start mt-5 items-center gap-2">
               <img
-                src="../public/icons/star.svg"
+                src="/icons/star.svg"
                 alt="imdb_rating"
                 className="w-4 h-4 sm:w-5 sm:h-5"
               />
