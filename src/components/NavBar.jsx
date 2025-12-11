@@ -31,17 +31,8 @@ export default function AppBar() {
         <LanguageSwitch />
       </span>
       <NavbarToggle className="text-[#7B6EF6] hover:cursor-pointer hover:bg-[#ffffff22]" />
-      <NavbarCollapse className="text-center md:text-left">
-        <NavbarLink
-          className={`text-white hover:cursor-pointer  ${
-            i18n.language === "fa" ? "text-[15px]" : ""
-          }`}
-          as={Link}
-          to="/random"
-        >
-          {t("home.nav_random")}
-        </NavbarLink>
-
+      
+       
   <NavbarCollapse className="text-center md:text-left space-y-4 md:space-y-0">
     <NavbarLink
       className={`text-white hover:cursor-pointer ${
