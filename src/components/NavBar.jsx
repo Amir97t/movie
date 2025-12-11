@@ -23,7 +23,7 @@ export default function AppBar() {
       <span className="flex items-center gap-3">
         <NavbarBrand as={Link} to="/">
           <img
-            src="icons/icon-tab.svg"
+            src="/icons/icon-tab.svg"
             className="h-6 sm:h-8 md:h-9"
             alt="Logo"
           />
