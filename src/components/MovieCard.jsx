@@ -11,7 +11,7 @@ export default function MovieCard({ id, title, poster, imdb_rating }) {
       >
         <img
           className="h-4 w-4"
-          src="../src/assets/star.svg"
+          src="../public/icons/star.svg"
           alt="rating-star"
         />
         <span className="text-sm  font-semibold">{imdb_rating}</span>
