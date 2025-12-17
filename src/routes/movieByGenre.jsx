@@ -15,23 +15,32 @@ export async function MovieByGenreLoader({ params }) {
 export default function MovieByGenre() {
   const { genre } = useParams();
   const { movies: initialMovies } = useLoaderData();
-
   const { t } = useTranslation();
 
   const [movies, setMovies] = useState(initialMovies || []);
   const [page, setPage] = useState(2);
   const [hasMore, setHasMore] = useState(true);
-  const [isFirstLoading, setIsFirstLoading] = useState(!initialMovies?.length);
+  const [isFirstLoading, setIsFirstLoading] = useState(
+    !initialMovies || initialMovies.length === 0
+  );
+
+  const VISIBLE_LIMIT = 48;
+  const visibleMovies =
+    movies.length > VISIBLE_LIMIT
+      ? movies.slice(movies.length - VISIBLE_LIMIT)
+      : movies;
 
   const fetchMoreMovies = async () => {
     try {
       const newMovies = await getMoviesByGenre(genre, page);
-      if (newMovies.length === 0) {
+
+      if (!newMovies || newMovies.length === 0) {
         setHasMore(false);
-      } else {
-        setMovies((prev) => [...prev, ...newMovies]);
-        setPage((prev) => prev + 1);
+        return;
       }
+
+      setMovies((prev) => [...prev, ...newMovies]);
+      setPage((prev) => prev + 1);
     } catch (err) {
       console.error(err);
       setHasMore(false);
@@ -42,13 +51,13 @@ export default function MovieByGenre() {
     setMovies(initialMovies || []);
     setPage(2);
     setHasMore(true);
-    setIsFirstLoading(!initialMovies?.length);
+    setIsFirstLoading(!initialMovies || initialMovies.length === 0);
   }, [genre, initialMovies]);
 
   if (isFirstLoading) {
     return (
       <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-12 mt-5">
-        {[...Array(8)].map((_, idx) => (
+        {Array.from({ length: 8 }).map((_, idx) => (
           <MovieCardSkeleton key={idx} />
         ))}
       </div>
@@ -57,25 +66,22 @@ export default function MovieByGenre() {
 
   return (
     <div className="mt-8">
-      <h2></h2>
       <InfiniteScroll
         dataLength={movies.length}
         next={fetchMoreMovies}
         hasMore={hasMore}
-        loader={
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center my-6">
-            {[...Array(4)].map((_, idx) => (
-              <MovieCardSkeleton key={idx} />
-            ))}
-          </div>
-        }
+        style={{ overflow: "visible" }}
         endMessage={
           <p className="text-center my-4 text-[#EBEEF5]">{t("home.scroll")}</p>
         }
-        style={{ overflow: "visible" }}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center my-6">
-          <MovieList movies={movies} />
+          <MovieList movies={visibleMovies} />
+
+          {hasMore &&
+            Array.from({ length: 6 }).map((_, idx) => (
+              <MovieCardSkeleton key={`skeleton-${idx}`} />
+            ))}
         </div>
       </InfiniteScroll>
       <ScrollToTopButton />
