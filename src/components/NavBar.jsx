@@ -6,11 +6,49 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import { Link } from "react-router-dom";
-import LanguageSwitch from "./LanguageSwitch";
+import { memo, lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import theme from "../theme";
 
-export default function AppBar() {
+const LanguageSwitch = lazy(() => import("./LanguageSwitch"));
+
+const NavLinks = memo(function NavLinks({ t, isFA }) {
+  return (
+    <>
+      <NavbarLink
+        className={`text-white hover:cursor-pointer ${
+          isFA ? "text-[15px]" : ""
+        }`}
+        as={Link}
+        to="/random"
+      >
+        {t("home.nav_random")}
+      </NavbarLink>
+
+      <NavbarLink
+        className={`text-white hover:cursor-pointer ${
+          isFA ? "text-[15px]" : ""
+        }`}
+        href="#"
+      >
+        {t("home.nav_middle")}
+      </NavbarLink>
+
+      <NavbarLink
+        className={`flex justify-center md:justify-start text-white gap-2 hover:cursor-pointer ${
+          isFA ? "text-base" : ""
+        }`}
+        as={Link}
+        to="/"
+      >
+        {t("home.nav_home")}
+        <img src="/icons/arrow-right.svg" alt="arrow" />
+      </NavbarLink>
+    </>
+  );
+});
+
+function AppNavbar() {
   const { t, i18n } = useTranslation();
   const isFA = i18n.language === "fa";
   const fontClass = isFA ? "font-fa" : "font-en";
@@ -28,41 +66,19 @@ export default function AppBar() {
             alt="Logo"
           />
         </NavbarBrand>
-        <LanguageSwitch />
+
+        <Suspense fallback={null}>
+          <LanguageSwitch />
+        </Suspense>
       </span>
+
       <NavbarToggle className="text-[#7B6EF6] hover:cursor-pointer hover:bg-[#ffffff22]" />
 
       <NavbarCollapse className="text-center md:text-left space-y-4 md:space-y-0">
-        <NavbarLink
-          className={`text-white hover:cursor-pointer ${
-            i18n.language === "fa" ? "text-[15px]" : ""
-          }`}
-          as={Link}
-          to="/random"
-        >
-          {t("home.nav_random")}
-        </NavbarLink>
-
-        <NavbarLink
-          className={`text-white hover:cursor-pointer ${
-            i18n.language === "fa" ? "text-[15px]" : ""
-          }`}
-          href="#"
-        >
-          {t("home.nav_middle")}
-        </NavbarLink>
-
-        <NavbarLink
-          className={`flex justify-center md:justify-start text-white gap-2 hover:cursor-pointer ${
-            i18n.language === "fa" ? "text-base" : ""
-          }`}
-          as={Link}
-          to="/"
-        >
-          {t("home.nav_home")}
-          <img src="/icons/arrow-right.svg" alt="arrow" />
-        </NavbarLink>
+        <NavLinks t={t} isFA={isFA} />
       </NavbarCollapse>
     </Navbar>
   );
 }
+
+export default memo(AppNavbar);
