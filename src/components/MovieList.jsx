@@ -7,6 +7,8 @@ export default function MovieList({ movies }) {
         movies.map((movie) => {
           return (
             <MovieCard
+              loading="lazy"
+              decoding="async"
               key={movie.id}
               id={movie.id}
               title={movie.title}

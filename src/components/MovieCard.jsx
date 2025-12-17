@@ -10,6 +10,8 @@ export default function MovieCard({ id, title, poster, imdb_rating }) {
       justify-center gap-1"
       >
         <img
+          loading="lazy"
+          decoding="async"
           className="h-4 w-4"
           src="/icons/star.svg"
           alt="rating-star"
