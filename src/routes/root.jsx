@@ -7,6 +7,7 @@ import getMovieBySearch from "../api/getMoviesBySearch";
 import MovieCard from "../components/MovieCard";
 import MovieCardSkeleton from "../components/MovieCardSkeleton";
 import { useTranslation } from "react-i18next";
+import useDebounce from "../hooks/useDebounce";
 
 const XIcon = ({ className }) => (
   <svg
@@ -32,13 +33,20 @@ export default function Root() {
   const fontClass = isFA ? "font-fa" : "font-en";
 
   const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 500);
+
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
+
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [tempAnimation, setTempAnimation] = useState({
     paddingLeft: 0,
     paddingRight: 0,
   });
+  const PAGE_SIZE = 8;
+  const isSearching = debouncedQuery.trim().length > 0;
 
   useEffect(() => {
     if (i18n.language === "fa") {
@@ -48,46 +56,80 @@ export default function Root() {
     }
   }, [i18n.language]);
 
-  const handleSearch = async () => {
-    const q = query.trim();
-    if (!q) return;
-    try {
-      setLoadingSearch(true);
-      const results = await getMovieBySearch(q);
-      if (!results || results.length === 0) {
-        setError(
-          <div className={`${i18n.language === "fa" ? "text-right" : ""}`}>
-            {t("home.error")}
-          </div>
-        );
-        setMovies([]);
-      } else {
-        setError("");
-        setMovies(results);
-      }
-    } catch (err) {
-      console.error(err);
-      setError("Search failed. Please try again.");
+  // const handleSearch = async () => {
+  //   const q = query.trim();
+  //   if (!q) return;
+  //   try {
+  //     setLoadingSearch(true);
+  //     const results = await getMovieBySearch(q);
+  //     if (!results || results.length === 0) {
+  //       setError(
+  //         <div className={`${i18n.language === "fa" ? "text-right" : ""}`}>
+  //           {t("home.error")}
+  //         </div>
+  //       );
+  //       setMovies([]);
+  //     } else {
+  //       setError("");
+  //       setMovies(results);
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //     setError("Search failed. Please try again.");
+  //     setMovies([]);
+  //   } finally {
+  //     setLoadingSearch(false);
+  //   }
+  // };
+
+  useEffect(() => {
+    const q = debouncedQuery.trim();
+    if (!q) {
       setMovies([]);
-    } finally {
-      setLoadingSearch(false);
+      setError("");
+      setPage(1);
+      setHasMore(true);
+      return;
     }
-  };
 
-  const handleReset = () => {
-    setQuery("");
-    setMovies([]);
-    setError("");
-  };
+    const fetchSearch = async () => {
+      try {
+        setLoadingSearch(true);
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSearch();
-    }
-  };
+        const results = await getMovieBySearch(q, page);
 
-  const isSearching = query.trim().length > 0;
+        if (!results || results.length === 0) {
+          if (page === 1) {
+            setMovies([]);
+            setError(
+              <div className={isFA ? "text-right" : ""}>{t("home.error")}</div>
+            );
+          }
+          setHasMore(false);
+        } else {
+          setError("");
+          setMovies((prev) => (page === 1 ? results : [...prev, ...results]));
+
+          if (results.length < PAGE_SIZE) {
+            setHasMore(false);
+          }
+        }
+      } catch {
+        setError("Search failed. Please try again.");
+      } finally {
+        setLoadingSearch(false);
+      }
+    };
+
+    fetchSearch();
+  }, [debouncedQuery, page]);
+
+  // const handleKeyDown = (e) => {
+  //   if (e.key === "Enter") {
+  //     e.preventDefault();
+  //     handleSearch();
+  //   }
+  // };
 
   return (
     <motion.div
@@ -159,7 +201,7 @@ export default function Root() {
             }}
           >
             <button
-              onClick={handleSearch}
+              // onClick={handleSearch}
               className={`absolute hover:cursor-pointer top-1/2 -translate-y-1/2
               ${i18n.language === "fa" ? "right-3" : "left-3"}`}
             >
@@ -178,7 +220,7 @@ export default function Root() {
                 setQuery(e.target.value);
                 if (e.target.value.trim() === "") handleReset();
               }}
-              onKeyDown={handleKeyDown}
+              // onKeyDown={handleKeyDown}
               placeholder={t("home.search")}
               className="w-9/10 sm:w-full h-16 pl-10 pr-10 rounded-lg bg-[#1c2236] text-white border border-[#8E95A9]"
             />
@@ -210,7 +252,7 @@ export default function Root() {
         {isSearching ? (
           loadingSearch ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 justify-items-center my-6">
-              {Array.from({ length: 8 }).map((_, idx) => (
+              {Array.from({ length: 4 }).map((_, idx) => (
                 <MovieCardSkeleton key={idx} />
               ))}
             </div>
