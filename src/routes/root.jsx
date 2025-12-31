@@ -56,6 +56,14 @@ export default function Root() {
     }
   }, [i18n.language]);
 
+  const handleReset = () => {
+    setQuery("");
+    setMovies([]);
+    setError("");
+    setPage(1);
+    setHasMore(true);
+  };
+
   // const handleSearch = async () => {
   //   const q = query.trim();
   //   if (!q) return;
@@ -101,9 +109,7 @@ export default function Root() {
         if (!results || results.length === 0) {
           if (page === 1) {
             setMovies([]);
-            setError(
-              <div className={isFA ? "text-right" : ""}>{t("home.error")}</div>
-            );
+            setError(t("home.error"));
           }
           setHasMore(false);
         } else {
@@ -247,7 +253,13 @@ export default function Root() {
           <GenreList />
         </motion.div>
 
-        {error && <p className="mt-6 ml-2 text-xl">{error}</p>}
+        {error && (
+          <div
+            className={`mt-6 ml-2 text-xl ${isFA ? "text-right" : "text-left"}`}
+          >
+            {error}
+          </div>
+        )}
 
         {isSearching ? (
           loadingSearch ? (
